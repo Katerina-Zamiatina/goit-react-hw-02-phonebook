@@ -3,6 +3,7 @@ import './App.css';
 import Section from './components/Section';
 import Form from './components/Form';
 import ContactsList from './components/Contacts';
+import Filter from './components/Filter';
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -29,6 +30,7 @@ const App = () => {
       </Section>
       <Section title="Contacts">
         <ContactsList contacts={contacts} onDelete={handleDeleteContact} />
+        <Filter />
       </Section>
     </div>
   );
