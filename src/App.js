@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Section from './components/Section';
+import Form from './components/Form';
+import ContactsList from './components/Contacts';
 
-function App() {
+const App = () => {
+  const [contacts, setContacts] = useState([]);
+
+  const handleAddContact = newContact =>
+    setContacts(prevState => [...prevState, newContact]);
+
+  const handleCheckUnique = name => {
+    const existingContact = !!contacts.find(contact => contact.name === name);
+    existingContact && alert(`${name} is already in contacts`);
+    return !existingContact;
+  };
+
+  const handleDeleteContact = id => {
+    setContacts(contacts => ({
+      contacts: contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Section title="Phonebook">
+        <Form onAdd={handleAddContact} isUnique={handleCheckUnique} />
+      </Section>
+      <Section title="Contacts">
+        <ContactsList contacts={contacts} onDelete={handleDeleteContact} />
+      </Section>
     </div>
   );
-}
+};
 
 export default App;
