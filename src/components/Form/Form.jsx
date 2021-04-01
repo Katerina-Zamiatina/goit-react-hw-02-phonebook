@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './Form.module.css';
@@ -70,6 +71,11 @@ const Form = ({ onAdd, isUnique }) => {
       </button>
     </form>
   );
+};
+
+Form.propTypes = {
+  onAdd: PropTypes.func.isRequired,
+  isUnique: PropTypes.func.isRequired,
 };
 
 export default Form;

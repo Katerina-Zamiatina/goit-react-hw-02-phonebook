@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './Contacts.module.css';
 
 const ContactItem = ({ contact, onDelete }) => {
