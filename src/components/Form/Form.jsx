@@ -5,7 +5,7 @@ import styles from './Form.module.css';
 const Form = ({ onAdd, isUnique }) => {
   const [contact, setContact] = useState({
     name: '',
-    phone: '',
+    number: '',
   });
 
   const handleChangeContact = e =>
@@ -19,7 +19,7 @@ const Form = ({ onAdd, isUnique }) => {
     const newContact = {
       id: uuidv4(),
       name: contact.name,
-      phone: contact.phone,
+      number: contact.number,
     };
     if (isUnique(contact.name)) {
       onAdd(newContact);
@@ -28,34 +28,42 @@ const Form = ({ onAdd, isUnique }) => {
   };
 
   const resetForm = () => {
-    setContact({ name: '', phone: '' });
+    setContact({ name: '', number: '' });
   };
 
   return (
     <form className={styles.container} onSubmit={handleFormSubmit}>
-      <input
-        className={styles.input}
-        type="text"
-        name="name"
-        placeholder="Enter name"
-        value={contact.name}
-        onChange={handleChangeContact}
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-        required
-      />
+      <label>
+        {' '}
+        Name
+        <input
+          className={styles.input}
+          type="text"
+          name="name"
+          placeholder="Enter name"
+          value={contact.name}
+          onChange={handleChangeContact}
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+          required
+        />
+      </label>
 
-      <input
-        className={styles.input}
-        type="tel"
-        name="phone"
-        placeholder="Enter number"
-        value={contact.phone}
-        onChange={handleChangeContact}
-        // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
-        // title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
-        required
-      />
+      <label>
+        {' '}
+        Number
+        <input
+          className={styles.input}
+          type="tel"
+          name="number"
+          placeholder="Enter number"
+          value={contact.number}
+          onChange={handleChangeContact}
+          // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+          // title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
+          required
+        />
+      </label>
 
       <button type="submit" className={styles.button}>
         Add contact

@@ -1,7 +1,6 @@
 import ContactItem from './ContactItem';
 
 const Contacts = ({ contacts, onDelete }) => {
-  console.log(contacts);
   return (
     <ul>
       {contacts.map(contact => (

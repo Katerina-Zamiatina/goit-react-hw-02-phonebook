@@ -1,9 +1,8 @@
 const ContactItem = ({ contact, onDelete }) => {
-  console.log(contact);
   return (
     <li>
       <span>{contact.name} : </span>
-      <span>{contact.phone}</span>
+      <span>{contact.number}</span>
       <button onClick={() => onDelete(contact.id)}>Delete</button>
     </li>
   );

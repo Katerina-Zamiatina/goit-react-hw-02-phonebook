@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import './App.css';
-import Section from './components/Section';
+import Container from './components/Container';
 import Form from './components/Form';
 import ContactsList from './components/Contacts';
 import Filter from './components/Filter';
 
 const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState([
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  ]);
+  const [filter, setFilter] = useState('');
 
   const handleAddContact = newContact =>
     setContacts(prevState => [...prevState, newContact]);
@@ -18,21 +24,31 @@ const App = () => {
   };
 
   const handleDeleteContact = id => {
-    setContacts(contacts => ({
-      contacts: contacts.filter(contact => contact.id !== id),
-    }));
+    setContacts(contacts => contacts.filter(contact => contact.id !== id));
+  };
+
+  const handleFilteredContact = e => {
+    setFilter(e.currentTarget.value);
+  };
+
+  const handleVisibleContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
   };
 
   return (
-    <div className="App">
-      <Section title="Phonebook">
-        <Form onAdd={handleAddContact} isUnique={handleCheckUnique} />
-      </Section>
-      <Section title="Contacts">
-        <ContactsList contacts={contacts} onDelete={handleDeleteContact} />
-        <Filter />
-      </Section>
-    </div>
+    <Container>
+      <h1>Phonebook</h1>
+      <Form onAdd={handleAddContact} isUnique={handleCheckUnique} />
+      <h2>Contacts</h2>
+      <Filter value={filter} onChange={handleFilteredContact} />
+      <ContactsList
+        contacts={handleVisibleContacts()}
+        onDelete={handleDeleteContact}
+      />
+    </Container>
   );
 };
 
