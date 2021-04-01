@@ -13,4 +13,8 @@ const ContactItem = ({ contact, onDelete }) => {
   );
 };
 
+ContactItem.propTypes = {
+  contact: PropTypes.objectOf(PropTypes.string).isRequired,
+};
+
 export default ContactItem;
