@@ -33,9 +33,9 @@ const Form = ({ onAdd, isUnique }) => {
 
   return (
     <form className={styles.container} onSubmit={handleFormSubmit}>
-      <label>
-        {' '}
-        Name
+      <label className={styles.label}>
+        <span className={styles.label__text}>Name</span>
+
         <input
           className={styles.input}
           type="text"
@@ -49,9 +49,9 @@ const Form = ({ onAdd, isUnique }) => {
         />
       </label>
 
-      <label>
-        {' '}
-        Number
+      <label className={styles.label}>
+        <span className={styles.label__text}>Number</span>
+
         <input
           className={styles.input}
           type="tel"
